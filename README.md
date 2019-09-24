@@ -137,8 +137,7 @@ Examples of plugins
 Papers
 ======
 
-- ["Coq Coq Correct!"](https://www.irif.fr/~sozeau/research/publications/drafts/Coq_Coq_Correct.pdf):
-  Verification of Type Checking and Erasure for Coq, in Coq.
+- ["Coq Coq Correct! Verification of Type Checking and Erasure for Coq, in Coq"](https://www.irif.fr/~sozeau/research/publications/drafts/Coq_Coq_Correct.pdf).
   Matthieu Sozeau, Simon Boulier, Yannick Forster, Nicolas Tabareau,
   Théo Winterhalter. Submitted.
 
