@@ -10,11 +10,16 @@ MetaCoq is a project formalizing Coq in Coq and providing tools for
 manipulating Coq terms and developing certified plugins
 (i.e. translations, compilers or tactics) in Coq.
 
-At the center of this project is the Tempate-Coq quoting library for
+**Quick jump**
+- [Installing](#installation-instructions)
+- [Documentation](#documentation)
+- [Papers](#papers)
+
+At the center of this project is the Template-Coq quoting library for
 Coq. The project currently has a single repository extending
 Template-Coq with additional features:
 
-Template-Coq
+[Template-Coq](template-coq/theories)
 ------------
 
 Template-Coq is a quoting library for [Coq](http://coq.inria.fr). It
@@ -29,64 +34,147 @@ In addition to this representation of terms, Template Coq includes:
 
 - Denotation of terms and global declarations
 
-- Complete reification and denotation of CIC terms, including universes
-
 - A monad for manipulating global declarations, calling the type
   checker, and inserting them in the global environment, in
   the stype of MTac.
-  
-Checker
+
+[Checker](checker/theories)
 -------
-  
-- A partial type-checker for the Calculus of Inductive Constructions,
-  runable as a plugin.
 
-PCUIC and Extraction
---------------------
+A partial type-checker for the Calculus of Inductive Constructions,
+whose extraction to ML is runable as a plugin (using command `MetaCoq
+Check foo`). This checker uses _fuel_, so it must be passed a number
+of maximal reduction steps to perfom when calling conversion.
 
-- A cleaned up version of the term language of Coq and its associated
-  type system, equivalent to the one of Coq.
-  
-- An extraction procedure to untyped lambda-calculus accomplishing the
-  same as the Extraction plugin of Coq
+[PCUIC](pcuic/theories)
+-----
 
-Translations
+PCUIC, the Polymorphic Cumulative Calculus of Inductive Constructions is
+a cleaned up version of the term language of Coq and its associated
+type system, equivalent to the one of Coq. This version of the
+calculus has (partial) proofs of standard metatheoretical results:
+
+- Weakening for global declarations, weakening and substitution for
+  local contexts.
+
+- Confluence of reduction using a notion of parallel reduction
+
+- Subject Reduction
+
+[Safe Checker](safechecker/theories)
+-----
+
+Implementation of a fuel-free and verified reduction machine, conversion
+checker and type checker for PCUIC.
+
+[Extraction](extraction/theories)
+----------
+
+An extraction procedure to untyped lambda-calculus accomplishing the
+same as the Extraction plugin of Coq.
+
+[Translations](translations)
 ------------
 
-- Example plugins built on top of this.
+Example of plugin built on top of this.
+
+Branches
+========
 
 The [coq-8.8](https://github.com/MetaCoq/metacoq/tree/coq-8.8) branch is the active development branch. If possible, it's strongly recommended to use this branch.
 
-The branch [coq-8.6](https://github.com/MetaCoq/metacoq/tree/coq-8.6) is stable, but only contains the first two features in the above list.
-The [coq-8.7](https://github.com/MetaCoq/metacoq/tree/coq-8.7) is stable and contains all features, but may not receive new ones.
+The branches [coq-8.6](https://github.com/MetaCoq/metacoq/tree/coq-8.6),
+[coq-8.7](https://github.com/MetaCoq/metacoq/tree/coq-8.7) are frozen.
+[coq-8.9](https://github.com/MetaCoq/metacoq/tree/coq-8.9) is also available.
 
 The branch [master](https://github.com/MetaCoq/metacoq/tree/master) tracks the current Coq `master` branch.
+
 
 Documentation
 =============
 
-The 8.8 branch [documentation (coqdoc files)](html-master/Template.All.html)
-and pretty-printed HTML versions of the [translations](html-master/translations) are available.
+You may want to start by a demo: [demo.v](https://github.com/MetaCoq/metacoq/tree/coq-8.8/test-suite/demo.v)
+
+The 8.8 branch [documentation (coqdoc files)](html/Template.All.html)
+and pretty-printed HTML versions of the [translations](html/translations) are available.
+
+ident vs. qualid. vs kername
+---------------------------
+
+MetaCoq uses three types convertible to `string` which have a different intended meaning:
+
+- `ident` is the type of identifiers, they should not contains any dot.
+  E.g. `nat`
+
+- `qualid` is the type of partially qualified names.
+  E.g. `Datatypes.nat`
+
+- `kername` is the type of fully qualified names.
+  E.g. `Coq.Init.Datatypes.nat`
+
+Quoting always produce fully qualified names. On the converse, unquoting allow to
+have only partially qualified names and rely on Coq to resolve them. The commands
+of the TemplateMonad also allow partially qualified names.
+
+Options
+-------
+
+`Set / Unset Strict Unquote Universe Mode`. When this mode is on,
+the unquoting of a universe level fails if this level does not exists.
+Otherwise the level is added to the current context. It is on by default.
+
+There is also an "opaque" universe `fresh_universe` which is unquoted to
+a fresh level when `Strict Unquote Universe Mode` is off.
+
+Examples of plugins
+-------------------
+
+- a plugin to add a constructor in [test-suite/add_constructor.v](https://github.com/MetaCoq/metacoq/tree/coq-8.8/test-suite/add_constructor.v)
+- a parametricity plugin in [translations/param_original.v](https://github.com/MetaCoq/metacoq/tree/coq-8.8/translations/param_original.v)
+- a plugin to negate funext in [translations/times_bool_fun.v](https://github.com/MetaCoq/metacoq/tree/coq-8.8/translations/times_bool_fun.v)
+
 
 Papers
 ======
 
-- The system was presented at 
-  [Coq'PL 2018](https://popl18.sigplan.org/event/coqpl-2018-typed-template-coq)
+- ["The MetaCoq Project"](https://www.irif.fr/~sozeau/research/publications/drafts/The_MetaCoq_Project.pdf)
+  Matthieu Sozeau, Abhishek Anand, Simon Boulier, Cyril Cohen, Yannick Forster, Fabian Kunze,
+  Gregory Malecha, Nicolas Tabareau, Théo Winterhalter.
+  Extended version of the ITP 2018 paper. Submitted.
 
-- ["Towards Certified Meta-Programming with Typed Template-Coq"](https://github.com/MetaCoq/metacoq/raw/master/docs/submission.pdf)
-  A. Anand, S. Boulier, C. Cohen, M. Sozeau and N. Tabareau.
-  ITP'18
+  This includes a full documentation of the Template Monad.
+
+- ["Towards Certified Meta-Programming with Typed Template-Coq"](https://hal.archives-ouvertes.fr/hal-01809681/document)
+  Abhishek Anand, Simon Boulier, Cyril Cohen, Matthieu Sozeau and Nicolas Tabareau.
+  ITP 2018.
+
+- The system was presented at [Coq'PL 2018](https://popl18.sigplan.org/event/coqpl-2018-typed-template-coq)
 
 Credits
 =======
 
+Template-Coq was originally developed by
+[Gregory Malecha](https://github.com/gmalecha).
+
+MetaCoq is now developed by [Abhishek Anand](https://github.com/aa755),
+[Simon Boulier](https://github.com/simonboulier),
+[Cyril Cohen](https://github.com/CohenCyril),
+[Yannick Forster](https://github.com/yforster),
+[Gregory Malecha](https://github.com/gmalecha),
+[Matthieu Sozeau](https://github.com/mattam82),
+[Nicolas Tabareau](https://github.com/Tabareau) and
+[Théo Winterhalter](https://github.com/TheoWinterhalter).
+
+<center>
 <img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/abhishek-anand.jpg"
 alt="Abhishek Anand" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/simon-boulier.jpg"
 alt="Simon Boulier" width="150px"/>
+<img
+src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/cyril-cohen.png"
+alt="Cyril Cohen" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/yannick-forster.jpg"
 alt="Yannick Forster" width="150px"/>
@@ -102,62 +190,30 @@ alt="Nicolas Tabareau" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/theo-winterhalter.jpg"
 alt="Théo Winterhalter" width="150px"/>
+</center>
 
-Template-Coq was originally developed by
-[Gregory Malecha](https://github.com/gmalecha), and is now developed by
-[Abhishek Anand](https://github.com/aa755), [Simon
-Boulier](https://github.com/simonboulier) and [Matthieu
-Sozeau](https://github.com/mattam82).
-
-Contributors include [Yannick Forster](https://github.com/yforster),
-[Cyril Cohen](https://github.com/CohenCyril) and [Nicolas
-Tabareau](https://github.com/Tabareau).
-
-Copyright (c) 2014-2018 Gregory Malecha\  
-Copyright (c) 2015-2018 Abhishek Anand, Matthieu Sozeau\  
-Copyright (c) 2017-2018 Simon Boulier, Nicolas Tabareau, Cyril Cohen
+```
+Copyright (c) 2014-2019 Gregory Malecha
+Copyright (c) 2015-2019 Abhishek Anand, Matthieu Sozeau
+Copyright (c) 2017-2019 Simon Boulier, Nicolas Tabareau, Cyril Cohen
+Copyright (c) 2018-2019 Yannick Forster, Théo Winterhalter
+```
 
 This software is distributed under the terms of the MIT license.
 See [LICENSE](LICENSE) for details.
 
-Subdirectories
-========
-
-The current development branch is [coq-8.8](https://github.com/MetaCoq/metacoq/tree/coq-8.8),
-which includes:
-
-  - The full syntax of CIC:
-    [Ast](https://github.com/MetaCoq/metacoq/blob/coq-8.8/template-coq/theories/Ast.v)
-
-  - The typing judgment of CIC: 
-    [Typing](https://github.com/MetaCoq/metacoq/blob/coq-8.8/template-coq/theories/Typing.v#L488)
-    
-  - A partial type-checker implementation:
-    [Checker](https://github.com/MetaCoq/metacoq/blob/coq-8.8/template-coq/theories/Checker.v)
-
-  - The `TemplateMonad` datatype and the `Run TemplateProgram` command
-    to run template programs:
-    [TemplateMonad](https://github.com/MetaCoq/metacoq/blob/coq-8.8/template-coq/theories/TemplateMonad.v)
-        
-Examples of plugins
--------------------
-- a plugin to add a constructor in [test-suite/add_constructor.v](https://github.com/MetaCoq/metacoq/tree/coq-8.8/test-suite/add_constructor.v)
-- a parametricity plugin in [translations/tsl_param.v](https://github.com/MetaCoq/metacoq/tree/coq-8.8/translations/tsl_param.v)
-- a plugin to negate funext in [translations/fun.v](https://github.com/MetaCoq/metacoq/tree/coq-8.8/translations/tsl_fun.v)
-
-
 Installation instructions
 =========================
 
-Install the 8.8 version from scratch
--------------------------------------------------------
+Install from GitHub repository
+------------------------------
 
 To get the source code:
 
     # git clone https://github.com/MetaCoq/metacoq.git
     # git checkout -b coq-8.8 origin/coq-8.8
     # git status
-    
+
 Check that you are indeed on the `coq-8.8` branch.
 
 Requirements
@@ -165,68 +221,100 @@ Requirements
 
 To compile the library, you need:
 
-- `Coq 8.8.1` (8.8.0 might work as well) and
-- `OCaml` (tested with `4.04.1`, beware that `OCaml 4.06.0` can 
-  produce linking errors on some platforms).
+- `Coq 8.8.2` (older versions of `8.8` might also work)
+- `OCaml` (tested with `4.04.1`, beware that `OCaml 4.06.0` can
+  produce linking errors on some platforms)
+- [`Equations 1.2`](http://mattam82.github.io/Coq-Equations/)
 
 Requirements through opam
 -------------------------
 
-The easiest way to get both is through [opam](http://opam.ocaml.org):
+The easiest way to get all packages is through [opam](http://opam.ocaml.org):
 
 You might want to create a "switch" (an environment of `opam` packages) for `Coq` if
-you don't have one yet:
-    
-    # opam switch -A 4.04.1 coq.8.8.1
-    # eval `opam config env`
-    
-This creates the `coq.8.8.1` switch which initially contains only the
+you don't have one yet. You need to use **opam 2** to obtain the right version of `Equations`.
+
+    # opam switch create coq.8.8.2 4.04.1
+    # eval $(opam env)
+
+This creates the `coq.8.8.2` switch which initially contains only the
 basic `OCaml` `4.04.1` compiler, and puts you in the right environment
 (check with `ocamlc -v`).
 
-Once in the right switch, you can install `Coq` using:
-    
-    # opam pin add coq 8.8.1 
-    
-Pinning `coq` prevents opam from trying to upgrade it afterwards, in
-this switch. If the command is successful you should have `coq`
+You can also create a [local
+switch](https://opam.ocaml.org/blog/opam-20-tips/#Local-switches) for
+developing using:
+
+    # opam switch create . 4.04.1
+
+Once in the right switch, you can install `Coq` and the `Equations` package using:
+
+    # opam pin add coq 8.8.2
+    # opam pin add coq-equations 1.2+8.8
+
+Pinning the packages prevents `opam` from trying to upgrade it afterwards, in
+this switch. If the commands are successful you should have `coq`
 available (check with `coqc -v`).
+
+You can test the installation of the packages locally using `opam install .`
+at the root directory.
 
 Compile
 -------
 
-Once in the right environment, Use:
+Once in the right environment, run `./configure.sh` for a global build or `./configure.sh local` for a local build. Then use:
 
-- `make` to compile the template-coq plugin (and the checker in `coq-8.8`)
+- `make` to compile the `template-coq` plugin, the `checker`, the `pcuic`
+  development and the `extraction` plugin. You can also selectively build
+  each target.
 
-- `make translations` to compile the translation plugins (in `coq-8.8`)
+- `make translations` to compile the translation plugins
 
 - `make test-suite` to compile the test suite
 
 - `make install` to install the plugin in `coq`'s user-contrib local
-  library. Then the `Template` namespace can be used for `Require
-  Import` statements, e.g. `From Template Require Import All.`.
+  library. Then the `MetaCoq` namespace can be used for `Require
+  Import` statements, e.g. `From MetaCoq.Template Require Import All.`.
 
-Install with OPAM (for 8.6 version only)
-----------------------------------------
+Install with OPAM
+-----------------
+Alternatively, you can install MetaCoq through [`opam`](https://opam.ocaml.org).
+
 Add the Coq repository:
 
     opam repo add coq-released https://coq.inria.fr/opam/released
 
 and run:
 
-    opam install coq-template-coq
+    opam install coq-metacoq
 
-To get beta versions of Coq, you might want to activate the repository:
+MetaCoq is split into multiple packages that get all installed using the
+`coq-metacoq` meta-package:
+
+ - `coq-metacoq-template` for the Template Monad and quoting plugin
+ - `coq-metacoq-checker` for the verified checker
+ - `coq-metacoq-pcuic` for the PCUIC development
+ - `coq-metacoq-extraction` for the verifed extraction.
+
+The `2.2alpha` versions of the package are for `Coq 8.8`.
+
+For some versions, it might be necessary to use beta or development
+versions of Coq, to get those you will need to activate the following repositories:
 
     opam repo add coq-core-dev https://coq.inria.fr/opam/core-dev
+    opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev
+
+
+Old standalone packages `template-coq-2.1~beta` and
+`template-coq-2.1~beta3` including everything together are for Coq 8.8.
+Package `template-coq-2.0~beta` is for Coq 8.7.
 
 How to Use
 ==========
 
 Check `test-suite/demo.v` for examples.
 
-Unless you installed the library, you must add the theories directory to
+Unless you installed the library (with `make install`), you must add the theories directory to
 your Coq load path with the prefix Template. This can be done on the
 command line by adding:
 
