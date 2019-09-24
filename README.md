@@ -138,14 +138,23 @@ Examples of plugins
 Papers
 ======
 
-- ["Coq Coq Correct! Verification of Type Checking and Erasure for Coq, in Coq"](https://www.irif.fr/~sozeau/research/publications/drafts/Coq_Coq_Correct.pdf).
-  Matthieu Sozeau, Simon Boulier, Yannick Forster, Nicolas Tabareau,
-  Théo Winterhalter. Submitted.
+- ["Coq Coq Codet! Towards a Verified Toolchain for Coq in
+  MetaCoq"](http://www.irif.fr/~sozeau/research/publications/Coq_Coq_Codet-CoqWS19.pdf)
+  Matthieu Sozeau, Simon Boulier, Yannick Forster, Nicolas Tabareau and
+  Théo Winterhalter. Abstract and
+  [presentation](http://www.ps.uni-saarland.de/~forster/downloads/slides-coqws19.pdf)
+  given at the [Coq Workshop
+  2019](https://staff.aist.go.jp/reynald.affeldt/coq2019/), September
+  2019.
 
+- ["Coq Coq Correct! Verification of Type Checking and Erasure for Coq, in Coq"](https://www.irif.fr/~sozeau/research/publications/drafts/Coq_Coq_Correct.pdf).
+  Matthieu Sozeau, Simon Boulier, Yannick Forster, Nicolas Tabareau
+  and Théo Winterhalter. Submitted, July 2019.
+  
 - ["The MetaCoq Project"](https://www.irif.fr/~sozeau/research/publications/drafts/The_MetaCoq_Project.pdf)
   Matthieu Sozeau, Abhishek Anand, Simon Boulier, Cyril Cohen, Yannick Forster, Fabian Kunze,
-  Gregory Malecha, Nicolas Tabareau, Théo Winterhalter.
-  Extended version of the ITP 2018 paper. Submitted.
+  Gregory Malecha, Nicolas Tabareau and Théo Winterhalter.
+  Extended version of the ITP 2018 paper. Submitted, March 2019.
 
   This includes a full documentation of the Template Monad.
 
