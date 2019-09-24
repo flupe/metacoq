@@ -4,7 +4,7 @@ MetaCoq
 <img src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/LOGO.png" alt="MetaCoq" width="50px"/>
 
 [![Build Status](https://travis-ci.org/MetaCoq/metacoq.svg?branch=coq-8.8)](https://travis-ci.org/MetaCoq/metacoq)
-[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/coq/Template-Coq)
+[![Gitter](https://badges.gitter.im/coq/metacoq.svg)](https://gitter.im/coq/metacoq?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 MetaCoq is a project formalizing Coq in Coq and providing tools for
 manipulating Coq terms and developing certified plugins
@@ -67,10 +67,10 @@ calculus has (partial) proofs of standard metatheoretical results:
 Implementation of a fuel-free and verified reduction machine, conversion
 checker and type checker for PCUIC.
 
-[Extraction](extraction/theories)
+[Erasure](erasure/theories)
 ----------
 
-An extraction procedure to untyped lambda-calculus accomplishing the
+An erasure procedure to untyped lambda-calculus accomplishing the
 same as the Extraction plugin of Coq.
 
 [Translations](translations)
@@ -136,6 +136,11 @@ Examples of plugins
 
 Papers
 ======
+
+- ["Coq Coq Correct!"](https://www.irif.fr/~sozeau/research/publications/drafts/Coq_Coq_Correct.pdf):
+  Verification of Type Checking and Erasure for Coq, in Coq.
+  Matthieu Sozeau, Simon Boulier, Yannick Forster, Nicolas Tabareau,
+  Théo Winterhalter. Submitted.
 
 - ["The MetaCoq Project"](https://www.irif.fr/~sozeau/research/publications/drafts/The_MetaCoq_Project.pdf)
   Matthieu Sozeau, Abhishek Anand, Simon Boulier, Cyril Cohen, Yannick Forster, Fabian Kunze,
