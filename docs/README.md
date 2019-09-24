@@ -1,7 +1,8 @@
-MetaCoq
-=======
+<!-- MetaCoq -->
+<!-- ======= -->
 
-<img src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/LOGO.png" alt="MetaCoq" width="50px"/>
+<!-- <img -->
+<!-- src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/LOGO.png" alt="MetaCoq" width="50px"/> -->
 
 [![Build Status](https://travis-ci.org/MetaCoq/metacoq.svg?branch=coq-8.8)](https://travis-ci.org/MetaCoq/metacoq)
 [![Gitter](https://badges.gitter.im/coq/metacoq.svg)](https://gitter.im/coq/metacoq?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -14,6 +15,7 @@ manipulating Coq terms and developing certified plugins
 - [Installing](#installation-instructions)
 - [Documentation](#documentation)
 - [Papers](#papers)
+- [Team](#team--credits)
 
 At the center of this project is the Template-Coq quoting library for
 Coq. The project currently has a single repository extending
@@ -154,25 +156,13 @@ Papers
 
 - The system was presented at [Coq'PL 2018](https://popl18.sigplan.org/event/coqpl-2018-typed-template-coq)
 
-Credits
+Team & Credits
 =======
 
-Template-Coq was originally developed by
-[Gregory Malecha](https://github.com/gmalecha).
-
-MetaCoq is now developed by [Abhishek Anand](https://github.com/aa755),
-[Simon Boulier](https://github.com/simonboulier),
-[Cyril Cohen](https://github.com/CohenCyril),
-[Yannick Forster](https://github.com/yforster),
-[Gregory Malecha](https://github.com/gmalecha),
-[Matthieu Sozeau](https://github.com/mattam82),
-[Nicolas Tabareau](https://github.com/Tabareau) and
-[Théo Winterhalter](https://github.com/TheoWinterhalter).
-
 <center>
-<img
+<figure><img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/abhishek-anand.jpg"
-alt="Abhishek Anand" width="150px"/>
+alt="Abhishek Anand" width="150px" display="inline"/>
 <img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/simon-boulier.jpg"
 alt="Simon Boulier" width="150px"/>
@@ -194,6 +184,18 @@ alt="Nicolas Tabareau" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/theo-winterhalter.jpg"
 alt="Théo Winterhalter" width="150px"/>
+
+<figcaption>MetaCoq is developed by (left to right) 
+<a href="https://github.com/aa755">Abhishek Anand</a>,
+<a href="https://github.com/simonboulier">Simon Boulier</a>,
+<a href="https://github.com/CohenCyril">Cyril Cohen</a>,
+<a href="https://github.com/yforster">Yannick Forster</a>,
+<a href="https://github.com/gmalecha">Gregory Malecha</a>,
+<a href="https://github.com/mattam82">Matthieu Sozeau</a>,
+<a href="https://github.com/Tabareau">Nicolas Tabareau</a> and
+<a href="https://github.com/TheoWinterhalter">Théo Winterhalter</a>.
+</figcaption>
+</figure>
 </center>
 
 ```
