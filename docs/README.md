@@ -81,6 +81,28 @@ Papers
 Credits
 =======
 
+<img
+src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/abhishek-anand.jpg"
+alt="Abhishek Anand" width="30px"/>
+<img
+src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/simon-boulier.jpg"
+alt="Simon Boulier" width="30px"/>
+<img
+src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/yannick-forster.jpg"
+alt="Yannick Forster" width="30px"/>
+<img
+src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/gregory-malecha.jpg"
+alt="Gregory Malecha" width="30px"/>
+<img
+src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/matthieu-sozeau.png"
+alt="Matthieu Sozeau" width="30px"/>
+<img
+src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/nicolas-tabareau.jpg"
+alt="Nicolas Tabareau" width="30px"/>
+<img
+src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/theo-winterhalter.jpg"
+alt="Théo Winterhalter" width="30px"/>
+
 Template-Coq was originally developed by
 [Gregory Malecha](https://github.com/gmalecha), and is now developed by
 [Abhishek Anand](https://github.com/aa755), [Simon
