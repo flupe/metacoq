@@ -1,3 +1,5 @@
+.history
+docs/_site
 *.annot
 .coq_config
 *.cm*
