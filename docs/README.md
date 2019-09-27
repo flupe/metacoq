@@ -179,7 +179,7 @@ src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/danil-annenkov.jp
 alt="Danil Annenkov" width="150px" display="inline"/>
 <img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/simon-boulier.jpg"
-alt="Simon Boulier" width="150px"/>
+alt="Simon Boulier" width="150px"/><br/>
 <img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/cyril-cohen.png"
 alt="Cyril Cohen" width="150px"/>
@@ -188,7 +188,7 @@ src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/yannick-forster.j
 alt="Yannick Forster" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/gregory-malecha.jpg"
-alt="Gregory Malecha" width="150px"/>
+alt="Gregory Malecha" width="150px"/><br/>
 <img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/matthieu-sozeau.png"
 alt="Matthieu Sozeau" width="150px"/>
@@ -217,7 +217,7 @@ alt="Théo Winterhalter" width="150px"/>
 Copyright (c) 2014-2019 Gregory Malecha
 Copyright (c) 2015-2019 Abhishek Anand, Matthieu Sozeau
 Copyright (c) 2017-2019 Simon Boulier, Nicolas Tabareau, Cyril Cohen
-Copyright (c) 2018-2019 Yannick Forster, Théo Winterhalter
+Copyright (c) 2018-2019 Danil Annenkov, Yannick Forster, Théo Winterhalter
 ```
 
 This software is distributed under the terms of the MIT license.
