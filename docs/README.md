@@ -175,6 +175,9 @@ Team & Credits
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/abhishek-anand.jpg"
 alt="Abhishek Anand" width="150px" display="inline"/>
 <img
+src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/danil-annenkov.jpeg"
+alt="Danil Annenkov" width="150px" display="inline"/>
+<img
 src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/simon-boulier.jpg"
 alt="Simon Boulier" width="150px"/>
 <img
@@ -198,6 +201,7 @@ alt="Théo Winterhalter" width="150px"/>
 
 <figcaption>MetaCoq is developed by (left to right) 
 <a href="https://github.com/aa755">Abhishek Anand</a>,
+<a href="https://github.com/annenkov">Danil Annenkov</a>,
 <a href="https://github.com/simonboulier">Simon Boulier</a>,
 <a href="https://github.com/CohenCyril">Cyril Cohen</a>,
 <a href="https://github.com/yforster">Yannick Forster</a>,
