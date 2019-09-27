@@ -1,9 +1,3 @@
-<!-- MetaCoq -->
-<!-- ======= -->
-
-<!-- <img -->
-<!-- src="https://github.com/MetaCoq/metacoq/raw/master/docs/assets/LOGO.png" alt="MetaCoq" width="50px"/> -->
-
 [![Build Status](https://travis-ci.org/MetaCoq/metacoq.svg?branch=coq-8.9)](https://travis-ci.org/MetaCoq/metacoq)
 [![Gitter](https://badges.gitter.im/coq/metacoq.svg)](https://gitter.im/coq/metacoq?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
@@ -38,7 +32,7 @@ In addition to this representation of terms, Template Coq includes:
 
 - A monad for manipulating global declarations, calling the type
   checker, and inserting them in the global environment, in
-  the stype of MTac.
+  the style of MTac.
 
 [Checker](checker/theories)
 -------
@@ -107,6 +101,9 @@ Documentation
 - The 8.9 branch [documentation (as light coqdoc files)](html/toc.html).
 - An example Coq plugin built on the Template Monad, which can be used to
   add a constructor to any inductive type is in [test-suite/add_constructor.v](https://github.com/MetaCoq/metacoq/tree/coq-8.9/test-suite/add_constructor.v)
+- The test-suite files [test-suite/erasure_test.v](https://github.com/MetaCoq/metacoq/tree/coq-8.9/test-suite/erasure_test.v)
+  and [test-suite/safechecker_test.v](https://github.com/MetaCoq/metacoq/tree/coq-8.9/test-suite/safechecker_test.v) show example
+  uses (and current limitations of) the verified checker and erasure.
 
 ident vs. qualid. vs kername
 ---------------------------
@@ -220,7 +217,7 @@ See [LICENSE](LICENSE) for details.
 Bugs
 ====
 
-Please report any bugs (or feature requests) on the github [issue tracker](https://github.com/MetaCoq/metacoq/issues)
+Please report any bugs (or feature requests) on the github [issue tracker](https://github.com/MetaCoq/metacoq/issues).
 
 Branches
 ========
