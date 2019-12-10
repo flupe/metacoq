@@ -53,6 +53,9 @@ Cumulative Inductive TemplateMonad@{t u} : Type@{t} -> Prop :=
 | tmUnquote : Ast.term  -> TemplateMonad typed_term@{u}
 | tmUnquoteTyped : forall A : Type@{t}, Ast.term -> TemplateMonad A
 
+| tmMonomorphicUniverse : string -> TemplateMonad unit
+| tmMonomorphicConstraint : univ_constraint -> TemplateMonad unit
+
 (* Typeclass registration and querying for an instance *)
 | tmExistingInstance : qualid -> TemplateMonad unit
 | tmInferInstance : option reductionStrategy -> forall A : Type@{t}, TemplateMonad (option A)

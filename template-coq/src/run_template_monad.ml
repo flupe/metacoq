@@ -16,7 +16,6 @@ open Constr_denoter
 open CoqLiveDenoter
 open TemplateCoqQuoter
 
-
 let unquote_reduction_strategy env evm trm (* of type reductionStrategy *) : Redexpr.red_expr =
   let (trm, args) = app_full trm [] in
   (* from g_tactic.ml4 *)
@@ -445,6 +444,13 @@ let rec run_template_program_rec ?(intactic=false) (k : Environ.env * Evd.evar_m
        Typing.e_check env evdref (EConstr.of_constr t') (EConstr.of_constr typ);
        let evm = !evdref in
        k (env, evm, t')
+  | TmMonomorphicUniverse (name) ->
+      let name = unquote_ident (reduce_all env evm name) in
+      (* let univs = DeclareUniv.do_universe ~poly:false name in_channel in *)
+      k (env, evm, Lazy.force unit_tt)
+  | TmMonomorphicConstraint (cstr) ->
+      let (evm, cstr) = unquote_univ_constraint evm cstr in
+      k (env, evm, Lazy.force unit_tt)
   | TmFreshName name ->
     let name' = Namegen.next_ident_away_from (unquote_ident name) (fun id -> Nametab.exists_cci (Lib.make_path id)) in
     k (env, evm, quote_ident name')
