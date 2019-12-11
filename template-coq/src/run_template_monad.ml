@@ -450,6 +450,7 @@ let rec run_template_program_rec ?(intactic=false) (k : Environ.env * Evd.evar_m
       k (env, evm, Lazy.force unit_tt)
   | TmMonomorphicConstraint (cstr) ->
       let (evm, cstr) = unquote_univ_constraint evm cstr in
+      (* let evm = Evd.add_universe_constraints evm (UnivProblem.Set.add cstr UnivProblem.Set.empty) in *)
       k (env, evm, Lazy.force unit_tt)
   | TmFreshName name ->
     let name' = Namegen.next_ident_away_from (unquote_ident name) (fun id -> Nametab.exists_cci (Lib.make_path id)) in

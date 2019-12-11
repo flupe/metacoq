@@ -9,6 +9,7 @@
 -Q ../erasure/theories MetaCoq.Erasure
 -R . MetaCoq.TestSuite
 
+tmConstraint.v
 bug1.v
 bug2.v
 bug5.v

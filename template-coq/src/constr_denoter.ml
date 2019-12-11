@@ -171,32 +171,39 @@ struct
         CErrors.user_err ~hdr:"unquote_level" (str ("Level "^s^" is not a declared level."))
 
   let unquote_level evm trm (* of type level *) : Evd.evar_map * Univ.Level.t =
-    let (h,args) = app_full trm [] in
-    if constr_equall h lProp then
-      match args with
-      | [] -> evm, Univ.Level.prop
-      | _ -> bad_term_verb trm "unquote_level"
-    else if constr_equall h lSet then
-      match args with
-      | [] -> evm, Univ.Level.set
-      | _ -> bad_term_verb trm "unquote_level"
-    else if constr_equall h tLevel then
-      match args with
-      | s :: [] -> debug (fun () -> str "Unquoting level " ++ pr_constr trm);
-        get_level evm (unquote_string s)
-      | _ -> bad_term_verb trm "unquote_level"
-    else if constr_equall h tLevelVar then
-      match args with
-      | l :: [] -> evm, Univ.Level.var (unquote_nat l)
-      | _ -> bad_term_verb trm "unquote_level"
+    if constr_equall trm lfresh_level then
+      if !strict_unquote_universe_mode then
+        CErrors.user_err ~hdr:"unquote_level" (str "It is not possible to unquote a fresh level in Strict Unquote Universe Mode.")
+      else
+        let evm, l = Evd.new_univ_level_variable (Evd.UnivFlexible false) evm in
+        Feedback.msg_info (str"Fresh level " ++ Level.pr l ++ str" was added to the context.");
+        evm, l
     else
-      not_supported_verb trm "unquote_level"
+      let (h,args) = app_full trm [] in
+      if constr_equall h lProp then
+        match args with
+        | [] -> evm, Univ.Level.prop
+        | _ -> bad_term_verb trm "unquote_level"
+      else if constr_equall h lSet then
+        match args with
+        | [] -> evm, Univ.Level.set
+        | _ -> bad_term_verb trm "unquote_level"
+      else if constr_equall h tLevel then
+        match args with
+        | s :: [] -> debug (fun () -> str "Unquoting level " ++ pr_constr trm);
+          get_level evm (unquote_string s)
+        | _ -> bad_term_verb trm "unquote_level"
+      else if constr_equall h tLevelVar then
+        match args with
+        | l :: [] -> evm, Univ.Level.var (unquote_nat l)
+        | _ -> bad_term_verb trm "unquote_level"
+      else
+        not_supported_verb trm "unquote_level"
 
   let unquote_level_expr evm trm (* of type level *) b (* of type bool *) : Evd.evar_map * Univ.Universe.t =
     let evm, l = unquote_level evm trm in
     let u = Univ.Universe.make l in
     evm, if unquote_bool b then Univ.Universe.super u else u
-
 
   let unquote_universe evm trm (* of type universe *) =
     if constr_equall trm lfresh_universe then
