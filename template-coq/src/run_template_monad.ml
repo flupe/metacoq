@@ -90,7 +90,6 @@ let unquote_constraint_type trm (* of type constraint_type *) : constraint_type 
     else not_supported_verb trm "unquote_constraint_type"
   | _ -> bad_term_verb trm "unquote_constraint_type"
 
-
 let unquote_univ_constraint evm c (* of type univ_constraint *) : _ * univ_constraint =
   let c, l2 = unquote_pair c in
   let l1, c = unquote_pair c in
@@ -181,8 +180,6 @@ let denote_universes_decl evm trm (* of type universes_decl *) : _ * universe_co
                  else
                    not_supported_verb trm "denote_universe_context"
   | _ -> bad_term_verb trm "denote_universe_context"
-
-
 
 let unquote_one_inductive_entry evm trm (* of type one_inductive_entry *) : _ * Entries.one_inductive_entry =
   let (h,args) = app_full trm [] in
@@ -445,6 +442,10 @@ let rec run_template_program_rec ?(intactic=false) (k : Environ.env * Evd.evar_m
        Typing.e_check env evdref (EConstr.of_constr t') (EConstr.of_constr typ);
        let evm = !evdref in
        k (env, evm, t')
+  | TmMonomorphicConstraint (cstr) ->
+      let evm, cstr = unquote_univ_constraint evm cstr in
+      let c = Constraint.add cstr Constraint.empty in
+      k (env, Evd.add_constraints evm c, Lazy.force unit_tt)
   | TmFreshName name ->
     let name' = Namegen.next_ident_away_from (unquote_ident name) (fun id -> Nametab.exists_cci (Lib.make_path id)) in
     k (env, evm, quote_ident name')

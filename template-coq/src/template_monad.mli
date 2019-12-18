@@ -43,6 +43,8 @@ type template_monad =
   | TmUnquote of Constr.t                   (* only Prop *)
   | TmUnquoteTyped of Constr.t * Constr.t (* only Prop *)
 
+  | TmMonomorphicConstraint of Constr.t
+
     (* typeclass resolution *)
   | TmExistingInstance of Constr.t
   | TmInferInstance of Constr.t * Constr.t (* only Prop *)

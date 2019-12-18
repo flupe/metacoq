@@ -217,3 +217,17 @@ Open Scope string_scope.
 Check (eq_refl : infer [] init_graph [] ((tProd (nNamed "A") (tSort (Universe.make' (Level.Level "Toto.85", false))) (tProd (nNamed "B") (tSort (Universe.make' (Level.Level "Toto.86", false))) (tProd nAnon (tRel 1) (tProd nAnon (tRel 1) (tRel 3)))))) = Checked (tSort _)).
 
 Make Definition t4 := (tSort (Universe.make (fresh_level))).
+
+Run TemplateProgram (
+  let l1 := fresh_level in
+  let l2 := fresh_level in
+  tmMonomorphicConstraint (l1, ConstraintType.Lt, l2) ;;
+  let t := (tProd nAnon (tSort (Universe.make l1)) (tSort (Universe.make l2))) in
+  tmUnquote t >>= tmPrint
+).
+
+Monomorphic Universe u1 u2.
+Monomorphic Constraint u1 < u2.
+Print Universes.
+Definition ttt := Type@{u1} -> Type@{u2}.
+Print ttt.

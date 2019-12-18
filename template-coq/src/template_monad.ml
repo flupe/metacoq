@@ -47,6 +47,8 @@ let (ptmReturn,
      ptmUnquote,
      ptmUnquoteTyped,
 
+     ptmMonomorphicConstraint,
+
      ptmInferInstance,
      ptmExistingInstance,
 
@@ -82,6 +84,8 @@ let (ptmReturn,
 
    r_template_monad_prop_p "tmUnquote",
    r_template_monad_prop_p "tmUnquoteTyped",
+
+   r_template_monad_prop_p "tmMonomorphicConstraint",
 
    r_template_monad_prop_p "tmInferInstance",
    r_template_monad_prop_p "tmExistingInstance",
@@ -176,6 +180,8 @@ type template_monad =
   | TmUnquote of Constr.t                   (* only Prop *)
   | TmUnquoteTyped of Constr.t * Constr.t (* only Prop *)
 
+  | TmMonomorphicConstraint of Constr.t
+
     (* typeclass resolution *)
   | TmExistingInstance of Constr.t
   | TmInferInstance of Constr.t * Constr.t (* only Prop *)
@@ -268,7 +274,6 @@ let next_action env evd (pgm : constr) : template_monad * _ =
     | name::typ::[] ->
        (TmLemmaTerm (name, typ), universes)
     | _ -> monad_failure "tmLemma" 2
-
   else if eq_gr ptmAxiomRed then
     match args with
     | name::s::typ::[] ->
@@ -356,7 +361,11 @@ let next_action env evd (pgm : constr) : template_monad * _ =
     | typ::t::[] ->
        (TmUnquoteTyped (typ, t), universes)
     | _ -> monad_failure "tmUnquoteTyped" 2
-
+  else if eq_gr ptmMonomorphicConstraint then
+    match args with
+    | cst::[] ->
+       (TmMonomorphicConstraint (cst), universes)
+    | _ -> monad_failure "tmMonomorphicConstraint" 1
   else if eq_gr ptmExistingInstance || eq_gr ttmExistingInstance then
     match args with
     | name :: [] ->
