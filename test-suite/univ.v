@@ -1,6 +1,7 @@
 From MetaCoq.Template Require Import All.
 Require Import String List Arith.
 Import ListNotations MonadNotation.
+Import MetaCoq.Template.All.
 Open Scope string.
 
 Set Printing Universes.
@@ -219,15 +220,10 @@ Check (eq_refl : infer [] init_graph [] ((tProd (nNamed "A") (tSort (Universe.ma
 Make Definition t4 := (tSort (Universe.make (fresh_level))).
 
 Run TemplateProgram (
-  let l1 := fresh_level in
-  let l2 := fresh_level in
+  l1 <- tmMonomorphicLevel ;;
+  l2 <- tmMonomorphicLevel ;;
   tmMonomorphicConstraint (l1, ConstraintType.Lt, l2) ;;
-  let t := (tProd nAnon (tSort (Universe.make l1)) (tSort (Universe.make l2))) in
-  tmUnquote t >>= tmPrint
+  tmMkDefinition "ttt" (tProd nAnon (tSort (Universe.make l1)) (tSort (Universe.make l2)))
 ).
 
-Monomorphic Universe u1 u2.
-Monomorphic Constraint u1 < u2.
-Print Universes.
-Definition ttt := Type@{u1} -> Type@{u2}.
 Print ttt.

@@ -47,6 +47,7 @@ let (ptmReturn,
      ptmUnquote,
      ptmUnquoteTyped,
 
+     ptmMonomorphicLevel,
      ptmMonomorphicConstraint,
 
      ptmInferInstance,
@@ -85,6 +86,7 @@ let (ptmReturn,
    r_template_monad_prop_p "tmUnquote",
    r_template_monad_prop_p "tmUnquoteTyped",
 
+   r_template_monad_prop_p "tmMonomorphicLevel",
    r_template_monad_prop_p "tmMonomorphicConstraint",
 
    r_template_monad_prop_p "tmInferInstance",
@@ -180,6 +182,7 @@ type template_monad =
   | TmUnquote of Constr.t                   (* only Prop *)
   | TmUnquoteTyped of Constr.t * Constr.t (* only Prop *)
 
+  | TmMonomorphicLevel
   | TmMonomorphicConstraint of Constr.t
 
     (* typeclass resolution *)
@@ -361,6 +364,11 @@ let next_action env evd (pgm : constr) : template_monad * _ =
     | typ::t::[] ->
        (TmUnquoteTyped (typ, t), universes)
     | _ -> monad_failure "tmUnquoteTyped" 2
+  else if eq_gr ptmMonomorphicLevel then
+    match args with
+    | [] ->
+       (TmMonomorphicLevel, universes)
+    | _ -> monad_failure "tmMonomorphicLevel" 0
   else if eq_gr ptmMonomorphicConstraint then
     match args with
     | cst::[] ->

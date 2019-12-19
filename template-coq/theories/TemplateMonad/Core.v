@@ -1,6 +1,6 @@
 From Coq Require Import Strings.String.
 Open Scope string_scope.
-From MetaCoq.Template Require Import Ast AstUtils Common.
+From MetaCoq.Template Require Import Ast AstUtils Common Universes.
 
 Set Universe Polymorphism.
 Set Universe Minimization ToSet.
@@ -53,6 +53,7 @@ Cumulative Inductive TemplateMonad@{t u} : Type@{t} -> Prop :=
 | tmUnquote : Ast.term  -> TemplateMonad typed_term@{u}
 | tmUnquoteTyped : forall A : Type@{t}, Ast.term -> TemplateMonad A
 
+| tmMonomorphicLevel : TemplateMonad Level.t
 | tmMonomorphicConstraint : univ_constraint -> TemplateMonad unit
 
 (* Typeclass registration and querying for an instance *)

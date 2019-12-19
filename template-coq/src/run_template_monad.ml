@@ -442,6 +442,9 @@ let rec run_template_program_rec ?(intactic=false) (k : Environ.env * Evd.evar_m
        Typing.e_check env evdref (EConstr.of_constr t') (EConstr.of_constr typ);
        let evm = !evdref in
        k (env, evm, t')
+  | TmMonomorphicLevel ->
+      let evm, l = Evd.new_univ_level_variable UnivRigid evm in
+      k (env, evm, quote_level l)
   | TmMonomorphicConstraint (cstr) ->
       let evm, cstr = unquote_univ_constraint evm cstr in
       let c = Constraint.add cstr Constraint.empty in
